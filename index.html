@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lisensi Royalti DApp</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Lisensi Hak Cipta dan Royalti</h1>
+      <p>Antarmuka web untuk smart contract LisensiRoyalti di jaringan Sepolia.</p>
+    </header>
+
+    <section class="panel">
+      <h2>1. Koneksi dompet</h2>
+      <button id="connectBtn">Hubungkan MetaMask</button>
+      <p><b>Akun:</b> <span id="account">belum terhubung</span></p>
+      <p><b>Jaringan:</b> <span id="network">-</span></p>
+    </section>
+
+    <section class="panel">
+      <h2>2. Data smart contract</h2>
+      <button id="reloadBtn">Muat ulang data</button>
+      <dl>
+        <dt>Kreator utama</dt><dd id="kreator">-</dd>
+        <dt>Jumlah karya</dt><dd id="jumlahKarya">-</dd>
+      </dl>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>ID</th><th>Judul</th><th>Harga</th><th>Terjual</th><th>Status</th><th>Kolaborator</th><th>Lisensi saya</th></tr></thead>
+          <tbody id="karyaBody"><tr><td colspan="7">Belum ada data.</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>3. Daftarkan karya (kreator utama)</h2>
+      <form id="formDaftar">
+        <label>Judul karya<input id="judul" placeholder="Contoh: Modul Web3" required /></label>
+        <label>Tautan IPFS<input id="cid" placeholder="ipfs://Qm..." required /></label>
+        <label>Alamat kolaborator<input id="kolaborator" placeholder="0x..." required /></label>
+        <label>Harga lisensi (ETH)<input id="harga" type="number" step="any" min="0" placeholder="0.001" required /></label>
+        <button type="submit">Daftarkan karya</button>
+      </form>
+      <p class="hint">Kontrak menolak pemanggil selain kreator utama (modifier hanyaKreator).</p>
+    </section>
+
+    <section class="panel">
+      <h2>4. Beli lisensi</h2>
+      <form id="formBeli">
+        <label>ID karya<input id="idBeli" type="number" min="0" step="1" value="0" required /></label>
+        <button type="submit">Beli lisensi</button>
+      </form>
+      <p class="hint">Nilai yang dikirim otomatis sama dengan harga lisensi karya.</p>
+    </section>
+
+    <section class="panel">
+      <h2>5. Royalti saya</h2>
+      <p><b>Saldo royalti:</b> <span id="saldo">-</span></p>
+      <button id="tarikBtn">Tarik royalti</button>
+    </section>
+
+    <section class="panel">
+      <h2>6. Ubah status karya (kreator utama)</h2>
+      <form id="formStatus">
+        <label>ID karya<input id="idStatus" type="number" min="0" step="1" value="0" required /></label>
+        <label>Status baru
+          <select id="statusBaru"><option value="true">Aktif</option><option value="false">Dihentikan</option></select>
+        </label>
+        <button type="submit">Simpan status</button>
+      </form>
+    </section>
+
+    <p id="status" class="status info">Klik Hubungkan MetaMask untuk memulai.</p>
+  </main>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
